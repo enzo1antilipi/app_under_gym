@@ -8,7 +8,7 @@ export default function HomePage() {
     <>
       <SiteHeader />
       <main>
-        <HomeIntro />
+        <HomeIntro/>
         <ProfessorGrid professors={professors} />
       </main>
     </>

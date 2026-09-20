@@ -1,0 +1,138 @@
+/* components/RatingPanel.module.css */
+
+.panel {
+  min-height: 100vh;
+  background-color: #0a0a0a;
+  color: #ffffff;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+/* ---------- Barra superior: Volver ---------- */
+.backButton {
+  display: block;
+  padding: 20px 24px;
+  border-bottom: 1px solid #262626;
+  color: #8a8a8a;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.backButton:hover {
+  color: #ffffff;
+}
+
+/* ---------- Datos del profesor ---------- */
+.profesor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 64px;
+}
+
+.inicial {
+  width: 104px;
+  height: 104px;
+  border-radius: 50%;
+  border: 2px solid #f5d90a;
+  color: #f5d90a;
+  font-size: 40px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.profesor h1 {
+  margin: 0;
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.profesor p {
+  margin: 8px 0 0;
+  color: #8a8a8a;
+  font-size: 16px;
+}
+
+/* ---------- Pregunta ---------- */
+.pregunta {
+  margin: 56px 0 0;
+  text-align: center;
+  color: #8a8a8a;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* ---------- Estrellas ---------- */
+.estrellas {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.estrella,
+.estrellaActiva {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 52px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.estrella {
+  color: #ffffff;
+}
+
+.estrellaActiva {
+  color: #f5d90a;
+}
+
+/* ---------- Texto de la puntuación ---------- */
+.puntuacionTexto {
+  margin: 24px 0 0;
+  text-align: center;
+  color: #8a8a8a;
+  font-size: 15px;
+}
+
+/* ---------- Botón Enviar ---------- */
+.enviarButton {
+  display: block;
+  width: calc(100% - 48px);
+  margin: 40px auto 0;
+  padding: 22px;
+  border: none;
+  border-radius: 14px;
+  background-color: #f5d90a;
+  color: #0a0a0a;
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.enviarButton:not(:disabled):hover {
+  background-color: #ffe93d;
+}
+
+.enviarButton:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* ---------- Mensaje de gracias ---------- */
+.gracias {
+  margin: 20px 0 0;
+  text-align: center;
+  color: #f5d90a;
+  font-weight: 700;
+}

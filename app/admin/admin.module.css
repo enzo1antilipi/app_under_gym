@@ -1,0 +1,135 @@
+.adminShell {
+  --admin-background: #070707;
+  --admin-surface: #111111;
+  --admin-surface-raised: #181818;
+  --admin-border: #242424;
+  --admin-text: #f4f4f4;
+  --admin-muted: #9098a5;
+  --admin-yellow: #ffdd00;
+  --admin-green: #38d45a;
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  background: var(--admin-background);
+  color: var(--admin-text);
+}
+
+.adminContent {
+  width: 100%;
+  max-width: 1200px;
+  padding: 48px;
+}
+
+.pageHeader {
+  margin-bottom: 32px;
+}
+
+.pageHeader h1 {
+  margin: 6px 0 10px;
+  font-size: clamp(2rem, 4vw, 3rem);
+}
+
+.pageHeader p:last-child {
+  color: var(--admin-muted);
+}
+
+.eyebrow {
+  color: var(--admin-yellow);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.notice,
+.placeholder {
+  margin-top: 28px;
+  padding: 28px;
+  border: 1px solid var(--admin-border);
+  border-radius: 16px;
+  background: var(--admin-surface);
+}
+
+.notice h2,
+.placeholder h2 {
+  margin-bottom: 8px;
+}
+
+.notice p,
+.placeholder p {
+  color: var(--admin-muted);
+}
+
+.mockList {
+  display: grid;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.mockRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 18px 20px;
+  border: 1px solid var(--admin-border);
+  border-radius: 12px;
+  background: var(--admin-surface-raised);
+}
+
+.mockRow p {
+  margin-top: 5px;
+}
+
+.mockRow span {
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #2a2a2a;
+  color: var(--admin-muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.mockRow span[data-status="active"],
+.mockRow span[data-status="approved"] {
+  background: rgba(56, 212, 90, 0.14);
+  color: var(--admin-green);
+}
+
+.mockRow span[data-status="pending"] {
+  background: rgba(255, 221, 0, 0.12);
+  color: var(--admin-yellow);
+}
+
+.ratingMeta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--admin-yellow);
+}
+
+@media (max-width: 800px) {
+  .adminShell {
+    grid-template-columns: 1fr;
+  }
+
+  .adminContent {
+    padding: 28px 20px;
+  }
+
+  .statsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .mockRow {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

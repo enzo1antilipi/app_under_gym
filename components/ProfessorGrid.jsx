@@ -1,12 +1,16 @@
 import ProfessorCard from "./ProfessorCard";
+import styles from "./ProfessorGrid.module.css";
 
 export default function ProfessorGrid({ professors }) {
-  if (professors.length === 0) return <p>Todavía no hay profesores cargados.</p>;
-
   return (
-    <section>
+    <section className={styles.grid}>
+      <h1>PROFESORES</h1>
+
       {professors.map((professor) => (
-        <ProfessorCard key={professor.id} professor={professor} />
+        <ProfessorCard
+          key={professor.id}
+          professor={professor}
+        />
       ))}
     </section>
   );

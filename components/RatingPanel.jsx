@@ -3,15 +3,34 @@
 import Link from "next/link";
 import estilos from "./RatingPanel.module.css";
 import { useState } from "react"; //Tarea 5 para el ESTADO
+import { createRating } from "@/lib/repositories/ratings";
 
 export default function RatingPanel({ professor }) {
   const inicial = professor.name.charAt(0);
   
   const [puntuacion, setPuntuacion] = useState(0); //Tarea 5
   const [enviado, setEnviado] = useState(false); //Tarea 5
+  const [enviando, setEnviando] = useState(false);
+  const [error, setError] = useState("");
 
-  function enviarCalificacion() {
-    setEnviado(true);
+  async function enviarCalificacion() {
+    setEnviando(true);
+    setError("");
+
+    try {
+      await createRating({
+        professorId: String(professor.id),
+        professorName: professor.name,
+        score: puntuacion,
+        comment: "",
+        author: "Anónimo",
+      });
+      setEnviado(true);
+    } catch {
+      setError("No pudimos guardar la calificación. Revisá la conexión con Firebase.");
+    } finally {
+      setEnviando(false);
+    }
   }
 
   return (
@@ -48,14 +67,16 @@ export default function RatingPanel({ professor }) {
         type="button"
         className={estilos.enviarButton}
         onClick={enviarCalificacion}
-        disabled={puntuacion === 0}
+        disabled={puntuacion === 0 || enviando}
       >
-        Enviar calificación
+        {enviando ? "Enviando..." : "Enviar calificación"}
       </button>
 
       {enviado && (
         <p className={estilos.gracias}>¡Gracias! Registramos tu calificación.</p>
       )}
+
+      {error && <p role="alert">{error}</p>}
 
     </section>
   );

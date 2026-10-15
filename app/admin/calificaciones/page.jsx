@@ -1,7 +1,11 @@
-import { ratings } from "@/data/ratings";
+import { getRatings } from "@/lib/repositories/ratings";
 import styles from "../admin.module.css";
 
-export default function AdminRatingsPage() {
+export const dynamic = "force-dynamic";
+
+export default async function AdminRatingsPage() {
+  const ratings = await getRatings();
+
   return (
     <>
       <header className={styles.pageHeader}>

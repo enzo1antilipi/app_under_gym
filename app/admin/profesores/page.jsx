@@ -1,7 +1,11 @@
-import { professors } from "@/data/professors";
+import { getProfessors } from "@/lib/repositories/professors";
 import styles from "../admin.module.css";
 
-export default function AdminProfessorsPage() {
+export const dynamic = "force-dynamic";
+
+export default async function AdminProfessorsPage() {
+  const professors = await getProfessors();
+
   return (
     <>
       <header className={styles.pageHeader}>

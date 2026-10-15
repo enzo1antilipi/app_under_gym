@@ -1,10 +1,10 @@
 import RatingPanel from "@/components/RatingPanel";
-import { professors } from "@/data/professors";
+import { getProfessorById } from "@/lib/repositories/professors";
 import { notFound } from "next/navigation";
 
 export default async function RatingPage({ params }) {
   const { id } = await params;
-  const professor = professors.find((item) => String(item.id) === id);
+  const professor = await getProfessorById(id);
 
   if (!professor) notFound();
 

@@ -47,6 +47,48 @@
   gap: 20px;
 }
 
+.connectionBanner {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 24px;
+  padding: 16px 18px;
+  border: 1px solid;
+  border-radius: 14px;
+  background: var(--admin-surface);
+}
+
+.connectionBanner p {
+  margin-top: 3px;
+  color: var(--admin-muted);
+  font-size: 0.9rem;
+}
+
+.connectionDot {
+  width: 11px;
+  height: 11px;
+  flex: 0 0 11px;
+  border-radius: 50%;
+}
+
+.connectionOnline {
+  border-color: rgba(56, 212, 90, 0.45);
+}
+
+.connectionOnline .connectionDot {
+  background: var(--admin-green);
+  box-shadow: 0 0 14px rgba(56, 212, 90, 0.75);
+}
+
+.connectionOffline {
+  border-color: rgba(255, 92, 92, 0.5);
+}
+
+.connectionOffline .connectionDot {
+  background: #ff5c5c;
+  box-shadow: 0 0 14px rgba(255, 92, 92, 0.65);
+}
+
 .notice,
 .placeholder {
   margin-top: 28px;

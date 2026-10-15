@@ -1,9 +1,29 @@
 import AdminStatCard from "@/components/admin/AdminStatCard";
-import { professors } from "@/data/professors";
-import { ratings } from "@/data/ratings";
+import { getFirebaseConnectionStatus } from "@/lib/firebase/status";
+import { getProfessors } from "@/lib/repositories/professors";
+import { getRatings } from "@/lib/repositories/ratings";
 import styles from "./admin.module.css";
 
-export default function AdminPage() {
+export const dynamic = "force-dynamic";
+
+export default async function AdminPage() {
+  const [connection, professorsResult, ratingsResult] = await Promise.all([
+    getFirebaseConnectionStatus(),
+    getProfessors(),
+    getRatings(),
+  ].map(async (operation) => {
+    try {
+      return { ok: true, value: await operation };
+    } catch {
+      return { ok: false, value: [] };
+    }
+  }));
+
+  const firebaseStatus = connection.ok
+    ? connection.value
+    : { connected: false, message: "No se pudo comprobar la conexión." };
+  const professors = professorsResult.value;
+  const ratings = ratingsResult.value;
   const average = ratings.length
     ? (ratings.reduce((total, rating) => total + rating.score, 0) / ratings.length).toFixed(1)
     : "—";
@@ -31,6 +51,23 @@ export default function AdminPage() {
         <h1>Resumen general</h1>
         <p>Desde acá vas a poder administrar profesores y calificaciones.</p>
       </header>
+
+      <section
+        className={`${styles.connectionBanner} ${
+          firebaseStatus.connected
+            ? styles.connectionOnline
+            : styles.connectionOffline
+        }`}
+        role="status"
+      >
+        <span className={styles.connectionDot} aria-hidden="true" />
+        <div>
+          <strong>
+            Base de datos: {firebaseStatus.connected ? "conectada" : "sin conexión"}
+          </strong>
+          <p>{firebaseStatus.message}</p>
+        </div>
+      </section>
 
       <section className={styles.statsGrid} aria-label="Resumen del sistema">
         <AdminStatCard

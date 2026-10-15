@@ -1,0 +1,23 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function isAdmin() {
+      return request.auth != null && request.auth.token.admin == true;
+    }
+
+    match /profesores/{professorId} {
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+
+    match /ratings/{ratingId} {
+      allow create: if request.resource.data.score is int
+        && request.resource.data.score >= 1
+        && request.resource.data.score <= 5
+        && request.resource.data.professorId is string
+        && request.resource.data.status == "pending";
+      allow read, update, delete: if isAdmin();
+    }
+  }
+}

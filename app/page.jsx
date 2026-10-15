@@ -1,9 +1,13 @@
 import HomeIntro from "@/components/HomeIntro";
 import ProfessorGrid from "@/components/ProfessorGrid";
 import SiteHeader from "@/components/SiteHeader";
-import { professors } from "@/data/professors";
+import { getProfessors } from "@/lib/repositories/professors";
 
-export default function HomePage() {
+export const dynamic = "force-dynamic";
+
+export default async function HomePage() {
+  const professors = await getProfessors();
+
   return (
     <>
       <SiteHeader />

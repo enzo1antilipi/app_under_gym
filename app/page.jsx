@@ -1,20 +1,26 @@
-import HomeIntro from "@/components/HomeIntro";
-import ProfessorGrid from "@/components/ProfessorGrid";
-import SiteHeader from "@/components/SiteHeader";
-import { getProfessors } from "@/lib/repositories/professors";
+import HomeIntro from '@/components/HomeIntro';
 
-export const dynamic = "force-dynamic";
-
-export default async function HomePage() {
-  const professors = await getProfessors();
-
+export default function Page() {
   return (
-    <>
-      <SiteHeader />
-      <main>
-        <HomeIntro/>
-        <ProfessorGrid professors={professors} />
-      </main>
-    </>
+    <main style={{ 
+      display: 'flex', 
+      flexDirection: 'column', 
+      alignItems: 'center', 
+      justifyContent: 'center', 
+      minHeight: '100vh', 
+      backgroundColor: '#f3f4f6',
+      padding: '1rem'
+    }}>
+      <div style={{
+        width: '100%',
+        maxWidth: '480px',
+        backgroundColor: '#ffffff',
+        borderRadius: '20px',
+        boxShadow: '0 10px 25px rgba(0, 0, 0, 0.05)',
+        overflow: 'hidden'
+      }}>
+        <HomeIntro />
+      </div>
+    </main>
   );
 }

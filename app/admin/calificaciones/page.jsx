@@ -1,12 +1,24 @@
 import { getRatings } from "@/lib/repositories/ratings";
+import AdminRatingsClient from "@/components/admin/calificaciones/AdminRatingsClient";
 import styles from "../admin.module.css";
-// Si creas un componente cliente para la interactividad, puedes importarlo aquí, 
-// o estructurar la tabla directamente si prefieres manejarlo de forma local.
 
 export const dynamic = "force-dynamic";
 
 export default async function AdminRatingsPage() {
-  const ratings = await getRatings();
+  let ratings = [];
+  let error = null;
+
+  // Estado de carga y error manejado en el servidor
+  try {
+    ratings = await getRatings();
+  } catch (err) {
+    error = "Ocurrió un error al cargar las calificaciones.";
+  }
+
+  // Estado de Error
+  if (error) {
+    return <div style={{ padding: '20px', color: 'red' }}>{error}</div>;
+  }
 
   return (
     <div className={styles.container}>
@@ -18,24 +30,9 @@ export default async function AdminRatingsPage() {
 
       <section className={styles.placeholder}>
         <h2>{ratings.length} calificaciones cargadas</h2>
-
-        {/* Aquí puedes incorporar la estructura de tabla o los elementos que pide tu consigna */}
-        <div className={styles.mockList}>
-          {ratings.map((rating) => (
-            <article className={styles.mockRow} key={rating.id}>
-              <div>
-                <strong>{rating.professorName}</strong>
-                <p>{rating.comment}</p>
-                {/* Agregando autor y fecha como pide la actividad */}
-                <small style={{ color: '#888' }}>Por {rating.author} el {rating.date || "Fecha no especificada"}</small>
-              </div>
-              <div className={styles.ratingMeta}>
-                <strong>{rating.score}/5</strong>
-                <span data-status={rating.status}>{rating.status}</span>
-              </div>
-            </article>
-          ))}
-        </div>
+        
+        {/* Renderiza el componente interactivo con la tabla, filtros y acciones */}
+        <AdminRatingsClient initialRatings={ratings} />
       </section>
     </div>
   );
